@@ -1,0 +1,36 @@
+{
+  "id": "reel",
+  "type": "SharedSlice",
+  "name": "Reel",
+  "description": "Reel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {
+              "width": null,
+              "height": null
+            },
+            "thumbnails": [
+              {
+                "name": "2/3",
+                "width": 344,
+                "height": 516
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

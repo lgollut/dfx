@@ -1,0 +1,65 @@
+{
+  "id": "hero",
+  "type": "SharedSlice",
+  "name": "Hero",
+  "description": "Hero",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "subtitle": {
+          "type": "Text",
+          "config": {
+            "label": "Subtitle",
+            "placeholder": ""
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": [
+              {
+                "name": "16/9",
+                "width": 1728,
+                "height": 972
+              },
+              {
+                "name": "9/16",
+                "width": 390,
+                "height": 693
+              }
+            ]
+          }
+        },
+        "tint": {
+          "type": "Select",
+          "config": {
+            "label": "Tint",
+            "placeholder": "",
+            "options": [
+              "none",
+              "primary",
+              "secondary"
+            ],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

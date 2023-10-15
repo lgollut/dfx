@@ -1,0 +1,111 @@
+import { styleVariants } from '@vanilla-extract/css';
+
+import { vars } from './contract.css';
+
+export const typography = styleVariants({
+  displayLarge: {
+    fontFamily: vars.type.display.large.font,
+    fontWeight: vars.type.display.large.weight,
+    fontSize: `clamp(min(12vw, ${vars.type.display.large.size}), 32px, ${vars.type.display.large.size})`,
+    lineHeight: vars.type.display.large.lineHeight,
+    letterSpacing: vars.type.display.large.tracking,
+  },
+  displayMedium: {
+    fontFamily: vars.type.display.medium.font,
+    fontWeight: vars.type.display.medium.weight,
+    fontSize: vars.type.display.medium.size,
+    lineHeight: vars.type.display.medium.lineHeight,
+    letterSpacing: vars.type.display.medium.tracking,
+  },
+  displaySmall: {
+    fontFamily: vars.type.display.small.font,
+    fontWeight: vars.type.display.small.weight,
+    fontSize: vars.type.display.small.size,
+    lineHeight: vars.type.display.small.lineHeight,
+    letterSpacing: vars.type.display.small.tracking,
+  },
+  headlineLarge: {
+    fontFamily: vars.type.headline.large.font,
+    fontWeight: vars.type.headline.large.weight,
+    fontSize: `clamp(min(3vw, ${vars.type.headline.large.size}), 20px, ${vars.type.headline.large.size})`,
+    lineHeight: vars.type.headline.large.lineHeight,
+    letterSpacing: vars.type.headline.large.tracking,
+  },
+  headlineMedium: {
+    fontFamily: vars.type.headline.medium.font,
+    fontWeight: vars.type.headline.medium.weight,
+    fontSize: vars.type.headline.medium.size,
+    lineHeight: vars.type.headline.medium.lineHeight,
+    letterSpacing: vars.type.headline.medium.tracking,
+  },
+  headlineSmall: {
+    fontFamily: vars.type.headline.small.font,
+    fontWeight: vars.type.headline.small.weight,
+    fontSize: vars.type.headline.small.size,
+    lineHeight: vars.type.headline.small.lineHeight,
+    letterSpacing: vars.type.headline.small.tracking,
+  },
+  titleLarge: {
+    fontFamily: vars.type.title.large.font,
+    fontWeight: vars.type.title.large.weight,
+    fontSize: vars.type.title.large.size,
+    lineHeight: vars.type.title.large.lineHeight,
+    letterSpacing: vars.type.title.large.tracking,
+  },
+  titleMedium: {
+    fontFamily: vars.type.title.medium.font,
+    fontWeight: vars.type.title.medium.weight,
+    fontSize: vars.type.title.medium.size,
+    lineHeight: vars.type.title.medium.lineHeight,
+    letterSpacing: vars.type.title.medium.tracking,
+  },
+  titleSmall: {
+    fontFamily: vars.type.title.small.font,
+    fontWeight: vars.type.title.small.weight,
+    fontSize: vars.type.title.small.size,
+    lineHeight: vars.type.title.small.lineHeight,
+    letterSpacing: vars.type.title.small.tracking,
+  },
+  labelLarge: {
+    fontFamily: vars.type.label.large.font,
+    fontSize: vars.type.label.large.size,
+    fontWeight: vars.type.label.large.weight,
+    letterSpacing: vars.type.label.large.tracking,
+    lineHeight: vars.type.label.large.lineHeight,
+  },
+  labelMedium: {
+    fontFamily: vars.type.label.medium.font,
+    fontSize: vars.type.label.medium.size,
+    fontWeight: vars.type.label.medium.weight,
+    lineHeight: vars.type.label.medium.lineHeight,
+    letterSpacing: vars.type.label.medium.tracking,
+  },
+  labelSmall: {
+    fontFamily: vars.type.label.small.font,
+    fontSize: vars.type.label.small.size,
+    fontWeight: vars.type.label.small.weight,
+    lineHeight: vars.type.label.small.lineHeight,
+    letterSpacing: vars.type.label.small.tracking,
+  },
+  bodyLarge: {
+    fontFamily: vars.type.body.large.font,
+    fontSize: vars.type.body.large.size,
+    fontWeight: vars.type.body.large.weight,
+    letterSpacing: vars.type.body.large.tracking,
+    lineHeight: vars.type.body.large.lineHeight,
+  },
+  bodyMedium: {
+    fontFamily: vars.type.body.medium.font,
+    fontSize: vars.type.body.medium.size,
+    fontWeight: vars.type.body.medium.weight,
+    letterSpacing: vars.type.body.medium.tracking,
+    lineHeight: vars.type.body.medium.lineHeight,
+  },
+  bodySmall: {
+    fontFamily: vars.type.body.small.font,
+    fontSize: vars.type.body.small.size,
+    fontWeight: vars.type.body.small.weight,
+    letterSpacing: vars.type.body.small.tracking,
+    lineHeight: vars.type.body.small.lineHeight,
+  },
+});

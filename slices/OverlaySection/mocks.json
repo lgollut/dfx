@@ -1,0 +1,96 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "be",
+				"type": "Text"
+			},
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "In et excepteur consectetur aute sit consequat. Id dolore velit labore et elit veniam et. Anim labore aute enim voluptate est eu sint cupidatat eu id esse."
+						}
+					}
+				]
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+					"width": 8640,
+					"height": 8640
+				},
+				"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+				"width": 8640,
+				"height": 8640,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {
+					"24/9": {
+						"origin": {
+							"id": "24/9",
+							"url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa",
+							"width": 2747,
+							"height": 4120
+						},
+						"url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa?rect=0%2C1545%2C2747%2C1030&w=1728&h=648",
+						"width": 1728,
+						"height": 648,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 0,
+								"y": 1545
+							},
+							"background": "transparent"
+						},
+						"credits": null,
+						"alt": null
+					},
+					"3/2": {
+						"origin": {
+							"id": "3/2",
+							"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+							"width": 8640,
+							"height": 8640
+						},
+						"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?rect=0%2C1440%2C8640%2C5760&w=390&h=260",
+						"width": 390,
+						"height": 260,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 0,
+								"y": 1440
+							},
+							"background": "transparent"
+						},
+						"credits": null,
+						"alt": null
+					}
+				}
+			},
+			"tint": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]
