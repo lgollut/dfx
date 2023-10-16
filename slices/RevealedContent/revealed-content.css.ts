@@ -24,7 +24,7 @@ export const container = style({
 export const content = style({
   width: 'calc(100% / 3)',
   height: '100%',
-  padding: vars.spacing.base,
+  padding: `${vars.spacing['5xl']} ${vars.spacing.base}`,
 
   position: 'absolute',
   top: 0,
@@ -37,4 +37,14 @@ export const content = style({
 
 export const image = style({
   transform: 'translateX(140px)',
+});
+
+export const stack = style({
+  alignSelf: 'flex-start',
+  display: 'flex',
+  flexWrap: 'wrap',
+  flexDirection: 'column',
+  gap: vars.spacing.base,
+
+  height: '100%',
 });

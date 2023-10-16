@@ -27,6 +27,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "contact": {
+              "type": "SharedSlice"
+            },
+            "document_link": {
+              "type": "SharedSlice"
+            },
             "revealed_content": {
               "type": "SharedSlice"
             },
@@ -34,9 +40,6 @@
               "type": "SharedSlice"
             },
             "reel": {
-              "type": "SharedSlice"
-            },
-            "media": {
               "type": "SharedSlice"
             },
             "hero": {

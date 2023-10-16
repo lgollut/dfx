@@ -5,6 +5,7 @@ import { vars } from '@/styles/contract.css';
 export const reelContainer = style({
   width: '100%',
   overflow: 'hidden',
+  paddingBlock: vars.spacing.base,
 
   position: 'relative',
 });

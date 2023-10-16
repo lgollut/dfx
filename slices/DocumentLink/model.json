@@ -1,0 +1,26 @@
+{
+  "id": "document_link",
+  "type": "SharedSlice",
+  "name": "DocumentLink",
+  "description": "DocumentLink",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "document": {
+          "type": "Link",
+          "config": {
+            "label": "Document",
+            "select": "document"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

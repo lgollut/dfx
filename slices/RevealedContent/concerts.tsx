@@ -3,23 +3,26 @@
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 import { isFilled } from '@prismicio/client';
-import PerfectScrollbar from 'perfect-scrollbar';
-import { useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useCallback, useMemo, useState } from 'react';
 
+import { Button } from '@/components/button';
 import { Heading } from '@/components/heading';
 import { Image } from '@/components/image';
 import { Stack } from '@/components/stack';
 import { Text } from '@/components/text';
+import { ConcertDocument } from '@/prismicio-types';
 import { RevealedContentProps } from '@/slices/RevealedContent';
 import { Concert } from '@/slices/RevealedContent/concert';
 import {
   container,
   content,
   image,
+  stack,
 } from '@/slices/RevealedContent/revealed-content.css';
 
 export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
-  const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null);
+  const [revealed, setRevealed] = useState(false);
 
   const pastConcerts = useMemo(
     () =>
@@ -41,6 +44,11 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
           return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
         }),
     [context.concerts],
+  );
+
+  const featuredConcert = useMemo(
+    () => pastConcerts.filter((concert) => concert.data.featured),
+    [pastConcerts],
   );
 
   const futureConcerts = useMemo(
@@ -65,17 +73,9 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
     [context.concerts],
   );
 
-  useEffect(() => {
-    if (!containerEl) {
-      return;
-    }
-
-    const ps = new PerfectScrollbar(containerEl);
-
-    return () => {
-      ps.destroy();
-    };
-  }, [containerEl]);
+  const handleReveal = useCallback(() => {
+    setRevealed((value) => !value);
+  }, [setRevealed]);
 
   return (
     <section
@@ -88,8 +88,33 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
         tint={slice.primary.tint}
         className={image}
       />
-      <div ref={setContainerEl} className={content}>
-        <Stack space="2xl">
+      <motion.div
+        initial={false}
+        layout
+        className={content}
+        animate={revealed ? 'revealed' : 'hidden'}
+        variants={{
+          revealed: {
+            width: '100%',
+            transition: {
+              type: 'spring',
+              stiffness: 300,
+              velocity: 10,
+              damping: 25,
+            },
+          },
+          hidden: {
+            width: '33%',
+            transition: {
+              type: 'spring',
+              stiffness: 300,
+              velocity: 10,
+              damping: 25,
+            },
+          },
+        }}
+      >
+        <Stack space="2xl" style={{ height: '100%', overflow: 'hidden' }}>
           <Heading variant="headlineLarge">{slice.primary.title}</Heading>
           {futureConcerts.length > 0 && (
             <Stack space="lg">
@@ -101,18 +126,68 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
               </Stack>
             </Stack>
           )}
-          <Stack space="lg">
-            <Heading variant="headlineMedium">{'Dernièrement'}</Heading>
-            <Stack>
-              {pastConcerts.map((concert) => (
-                <Text
-                  key={concert.uid}
-                >{`${concert.data.venue} - ${concert.data.location}`}</Text>
-              ))}
-            </Stack>
+          <Stack space="lg" style={{ flex: '1 1 100%' }}>
+            <AnimatePresence mode="popLayout">
+              {revealed ? (
+                <motion.div
+                  key="past"
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <Heading variant="headlineMedium">
+                    {'Tous les concerts passés'}
+                  </Heading>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="featured"
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <Heading variant="headlineMedium">
+                    {'Sélection de concerts'}
+                  </Heading>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <div style={{ contain: 'size', height: '100%' }}>
+              <AnimatePresence mode="wait">
+                {revealed ? (
+                  <ConcertList key={'past'} concerts={pastConcerts} />
+                ) : (
+                  <ConcertList key={'featured'} concerts={featuredConcert} />
+                )}
+              </AnimatePresence>
+            </div>
+            <Button onClick={handleReveal}>{'Tout voir'}</Button>
           </Stack>
         </Stack>
-      </div>
+      </motion.div>
     </section>
+  );
+};
+
+const ConcertList = ({ concerts }: { concerts: ConcertDocument[] }) => {
+  return (
+    <motion.div
+      inherit={false}
+      className={stack}
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { staggerChildren: 0.1 } }}
+    >
+      {concerts.map((concert) => (
+        <motion.div
+          inherit={false}
+          key={`${concert.uid}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <Text>{`${concert.data.venue} - ${concert.data.location}`}</Text>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 };

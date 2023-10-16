@@ -1,0 +1,64 @@
+{
+  "id": "media_section",
+  "label": "MediaSection",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "subtitle": {
+        "type": "Text",
+        "config": {
+          "label": "Subtitle",
+          "placeholder": ""
+        }
+      },
+      "media": {
+        "type": "Group",
+        "config": {
+          "label": "Media",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Title",
+                "placeholder": ""
+              }
+            },
+            "file": {
+              "type": "Link",
+              "config": {
+                "label": "File",
+                "placeholder": "",
+                "select": "media"
+              }
+            },
+            "media_type": {
+              "type": "Select",
+              "config": {
+                "label": "Media Type",
+                "placeholder": "",
+                "options": ["Audio", "Video"]
+              }
+            },
+            "poster": {
+              "type": "Image",
+              "config": {
+                "label": "Poster",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

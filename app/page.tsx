@@ -27,7 +27,75 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Index() {
   const client = createClient();
   const [homepage, concerts] = await Promise.all([
-    client.getByUID('page', 'homepage'),
+    client.getByUID('page', 'homepage', {
+      graphQuery: `{
+        page {
+          slices {
+            ...on hero {
+              variation {
+                ...on default {
+                  primary {
+                    ...primaryFields
+                  }
+                }
+              }
+            }
+            ...on overlay_section {
+              variation {
+                ...on default {
+                  primary {
+                    ...primaryFields
+                  }
+                }
+              }
+            }
+            ...on reel {
+              variation {
+                ...on default {
+                  primary {
+                    ...primaryFields
+                  }
+                  items {
+                    ...itemsFields
+                  }
+                }
+              }
+            }
+            ...on revealed_content {
+              variation {
+                ...on concert {
+                  primary {
+                    ...primaryFields
+                  }
+                }
+              }
+            }
+            ...on document_link {
+              variation {
+                ...on default {
+                  primary {
+                    document {
+                      ...on media_section {
+                        ...media_sectionFields
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            ...on contact {
+              variation {
+                ...on default {
+                  primary {
+                    ...primaryFields
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`,
+    }),
     client.getAllByType('concert'),
   ]);
 

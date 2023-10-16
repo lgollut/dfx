@@ -3,8 +3,9 @@
 import dynamic from 'next/dynamic';
 
 export const components = {
+  contact: dynamic(() => import('./Contact')),
+  document_link: dynamic(() => import('./DocumentLink')),
   hero: dynamic(() => import('./Hero')),
-  media: dynamic(() => import('./Media')),
   overlay_section: dynamic(() => import('./OverlaySection')),
   reel: dynamic(() => import('./Reel')),
   revealed_content: dynamic(() => import('./RevealedContent')),

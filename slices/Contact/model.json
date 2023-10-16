@@ -1,0 +1,47 @@
+{
+  "id": "contact",
+  "type": "SharedSlice",
+  "name": "Contact",
+  "description": "Contact",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "tint": {
+          "type": "Select",
+          "config": {
+            "label": "Tint",
+            "placeholder": "",
+            "options": [
+              "none",
+              "primary",
+              "secondary"
+            ],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

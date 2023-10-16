@@ -31,7 +31,7 @@ export const image = recipe({
       true: {
         width: '100%',
         height: '100%',
-        position: 'relative',
+        position: 'absolute',
       },
     },
 
@@ -65,7 +65,7 @@ globalStyle(`${image.classNames.base} > img`, {
   height: 'auto',
 });
 
-globalStyle(`${image.classNames.variants.cover} > img`, {
+globalStyle(`${image.classNames.variants.cover.true} > img`, {
   width: '100%',
   height: '100%',
   position: 'absolute',

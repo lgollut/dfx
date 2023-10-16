@@ -51,6 +51,18 @@ interface ConcertDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField;
+
+  /**
+   * Featured field in *Concert*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: concert.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  featured: prismic.BooleanField;
 }
 
 /**
@@ -69,11 +81,111 @@ export type ConcertDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *MediaSection → Media*
+ */
+export interface MediaSectionDocumentDataMediaItem {
+  /**
+   * Title field in *MediaSection → Media*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.media[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * File field in *MediaSection → Media*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.media[].file
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  file: prismic.LinkToMediaField;
+
+  /**
+   * Media Type field in *MediaSection → Media*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.media[].media_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  media_type: prismic.SelectField<'Audio' | 'Video'>;
+
+  /**
+   * Poster field in *MediaSection → Media*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.media[].poster
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  poster: prismic.ImageField<never>;
+}
+
+/**
+ * Content for MediaSection documents
+ */
+interface MediaSectionDocumentData {
+  /**
+   * Title field in *MediaSection*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *MediaSection*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Media field in *MediaSection*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.media[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  media: prismic.GroupField<Simplify<MediaSectionDocumentDataMediaItem>>;
+}
+
+/**
+ * MediaSection document from Prismic
+ *
+ * - **API ID**: `media_section`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MediaSectionDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<MediaSectionDocumentData>,
+    'media_section',
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice =
+  | ContactSlice
+  | DocumentLinkSlice
   | RevealedContentSlice
   | OverlaySectionSlice
   | ReelSlice
-  | MediaSlice
   | HeroSlice;
 
 /**
@@ -147,7 +259,121 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, 'page', Lang>;
 
-export type AllDocumentTypes = ConcertDocument | PageDocument;
+export type AllDocumentTypes =
+  | ConcertDocument
+  | MediaSectionDocument
+  | PageDocument;
+
+/**
+ * Primary content in *Contact → Primary*
+ */
+export interface ContactSliceDefaultPrimary {
+  /**
+   * Title field in *Contact → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Tint field in *Contact → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: contact.primary.tint
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  tint: prismic.SelectField<'none' | 'primary' | 'secondary', 'filled'>;
+}
+
+/**
+ * Default variation for Contact Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ContactSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Contact*
+ */
+type ContactSliceVariation = ContactSliceDefault;
+
+/**
+ * Contact Shared Slice
+ *
+ * - **API ID**: `contact`
+ * - **Description**: Contact
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSlice = prismic.SharedSlice<
+  'contact',
+  ContactSliceVariation
+>;
+
+/**
+ * Primary content in *DocumentLink → Primary*
+ */
+export interface DocumentLinkSliceDefaultPrimary {
+  /**
+   * Document field in *DocumentLink → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: document_link.primary.document
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  document: prismic.ContentRelationshipField;
+}
+
+/**
+ * Default variation for DocumentLink Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DocumentLinkSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<DocumentLinkSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *DocumentLink*
+ */
+type DocumentLinkSliceVariation = DocumentLinkSliceDefault;
+
+/**
+ * DocumentLink Shared Slice
+ *
+ * - **API ID**: `document_link`
+ * - **Description**: DocumentLink
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DocumentLinkSlice = prismic.SharedSlice<
+  'document_link',
+  DocumentLinkSliceVariation
+>;
 
 /**
  * Primary content in *Hero → Primary*
@@ -221,73 +447,6 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
-
-/**
- * Primary content in *Media → Primary*
- */
-export interface MediaSliceDefaultPrimary {
-  /**
-   * Title field in *Media → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-}
-
-/**
- * Primary content in *Media → Items*
- */
-export interface MediaSliceDefaultItem {
-  /**
-   * Video field in *Media → Items*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media.items[].video
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  video: prismic.LinkToMediaField;
-
-  /**
-   * Soundcloud field in *Media → Items*
-   *
-   * - **Field Type**: Embed
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media.items[].soundcloud
-   * - **Documentation**: https://prismic.io/docs/field#embed
-   */
-  soundcloud: prismic.EmbedField;
-}
-
-/**
- * Default variation for Media Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type MediaSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Simplify<MediaSliceDefaultPrimary>,
-  Simplify<MediaSliceDefaultItem>
->;
-
-/**
- * Slice variation for *Media*
- */
-type MediaSliceVariation = MediaSliceDefault;
-
-/**
- * Media Shared Slice
- *
- * - **API ID**: `media`
- * - **Description**: Media
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type MediaSlice = prismic.SharedSlice<'media', MediaSliceVariation>;
 
 /**
  * Primary content in *OverlaySection → Primary*
@@ -551,19 +710,25 @@ declare module '@prismicio/client' {
     export type {
       ConcertDocument,
       ConcertDocumentData,
+      MediaSectionDocument,
+      MediaSectionDocumentData,
+      MediaSectionDocumentDataMediaItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ContactSlice,
+      ContactSliceDefaultPrimary,
+      ContactSliceVariation,
+      ContactSliceDefault,
+      DocumentLinkSlice,
+      DocumentLinkSliceDefaultPrimary,
+      DocumentLinkSliceVariation,
+      DocumentLinkSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
-      MediaSlice,
-      MediaSliceDefaultPrimary,
-      MediaSliceDefaultItem,
-      MediaSliceVariation,
-      MediaSliceDefault,
       OverlaySectionSlice,
       OverlaySectionSliceDefaultPrimary,
       OverlaySectionSliceVariation,

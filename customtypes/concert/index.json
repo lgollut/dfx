@@ -40,6 +40,15 @@
           "placeholder": "",
           "select": null
         }
+      },
+      "featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Featured",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
       }
     }
   }
