@@ -1,3 +1,4 @@
+import { RTImageNode } from '@prismicio/client';
 import { wrapMapSerializer, serialize } from '@prismicio/richtext';
 import { ReactNode, useMemo } from 'react';
 
@@ -94,7 +95,7 @@ const markdownSerializer = wrapMapSerializer({
   oListItem: ({ children }) => <li>{parseText(children)}</li>,
   list: ({ children }) => <ul>{parseText(children)}</ul>,
   oList: ({ children }) => <ol>{parseText(children)}</ol>,
-  image: ({ node }) => <Image field={node} />,
+  image: ({ node }) => <Image field={node as RTImageNode} />,
   embed: ({ node }) => `${node.oembed.html}\n\n`,
   hyperlink: ({ node, children }) => (
     <Text use="a" variant="bodySmall" color="primary" href={node.data.url}>
