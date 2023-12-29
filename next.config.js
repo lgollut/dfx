@@ -1,6 +1,6 @@
 // @ts-check
 
-const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
+const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin');
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
@@ -12,7 +12,6 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     typedRoutes: true,
-    serverActions: true,
   },
 };
 
