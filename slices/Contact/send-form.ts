@@ -20,8 +20,8 @@ export async function sendForm({
   const resend = new Resend(process.env.RESEND_KEY);
 
   return await resend.emails.send({
-    from: 'info@stephaniegiorgis.ch',
-    to: 'info@stephaniegiorgis.ch',
+    from: 'info@dfx.band',
+    to: 'info@dfx.band',
     subject,
     react: Message({ name, email, subject, message }),
   });
