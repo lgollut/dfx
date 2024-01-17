@@ -67,36 +67,41 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       <Box space={['5xl', 'base']} className={contactForm}>
         <Stack space="2xl">
           <Heading>{slice.primary.title}</Heading>
-          <Stack space="lg">
-            <Stack use="label" space="xs">
-              <Text>{'Votre nom'}</Text>
-              <Input {...register('name', { required: true })} />
-            </Stack>
-            <Stack use="label" space="xs">
-              <Text>{'Votre email'}</Text>
-              <Input type="email" {...register('email', { required: true })} />
-            </Stack>
-            <Stack use="label" space="xs">
-              <Text>{'Sujet du message'}</Text>
-              <Input {...register('subject', { required: true })} />
-            </Stack>
-            <Stack use="label" space="xs">
-              <Text>{'Message'}</Text>
-              <Textarea {...register('message', { required: true })} />
-            </Stack>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack space="lg">
+              <Stack use="label" space="xs">
+                <Text>{'Votre nom'}</Text>
+                <Input {...register('name', { required: true })} />
+              </Stack>
+              <Stack use="label" space="xs">
+                <Text>{'Votre email'}</Text>
+                <Input
+                  type="email"
+                  {...register('email', { required: true })}
+                />
+              </Stack>
+              <Stack use="label" space="xs">
+                <Text>{'Sujet du message'}</Text>
+                <Input {...register('subject', { required: true })} />
+              </Stack>
+              <Stack use="label" space="xs">
+                <Text>{'Message'}</Text>
+                <Textarea {...register('message', { required: true })} />
+              </Stack>
 
-            <Cluster space="lg">
-              <Button type="submit" disabled={isPending}>
-                {'Envoyer'}
-              </Button>
-              {sent && (
-                <Cluster space="sm">
-                  <Check size={24} />
-                  <Text>{'Message envoyé'}</Text>
-                </Cluster>
-              )}
-            </Cluster>
-          </Stack>
+              <Cluster space="lg">
+                <Button type="submit" disabled={isPending}>
+                  {'Envoyer'}
+                </Button>
+                {sent && (
+                  <Cluster space="sm">
+                    <Check size={24} />
+                    <Text>{'Message envoyé'}</Text>
+                  </Cluster>
+                )}
+              </Cluster>
+            </Stack>
+          </form>
         </Stack>
       </Box>
     </section>

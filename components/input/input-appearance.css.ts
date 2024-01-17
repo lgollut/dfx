@@ -35,7 +35,7 @@ const inputAppearanceBase = style([
     },
 
     vars: {
-      [inputTextColor]: vars.color.onSurface,
+      [inputTextColor]: vars.color.surface,
     },
   },
 ]);
