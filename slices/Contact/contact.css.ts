@@ -19,9 +19,19 @@ export const contact = style({
 
 export const contactForm = style({
   zIndex: 1,
-  width: 'calc(100% / 3)',
+  width: '100%',
 
   position: 'relative',
+
+  '@media': {
+    '(min-width: 768px)': {
+      width: 'calc(100% / 2)',
+    },
+
+    '(min-width: 1024px)': {
+      width: 'calc(100% / 3)',
+    },
+  },
 });
 
 export const formBackground = style({

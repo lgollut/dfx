@@ -1,5 +1,8 @@
+'use client';
+
 import { type Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
+import { useIsClient } from '@uidotdev/usehooks';
 import { ReactNode } from 'react';
 
 import { ConcertsSlice } from '@/slices/RevealedContent/concerts';
@@ -18,7 +21,9 @@ const RevealedContent = ({
   slice,
   ...rest
 }: RevealedContentProps): ReactNode => {
-  if (slice.variation === 'default') {
+  const isClient = useIsClient();
+
+  if (!isClient || slice.variation === 'default') {
     return null;
   }
 

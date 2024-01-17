@@ -1,6 +1,7 @@
 import { isFilled, type Content } from '@prismicio/client';
 import { ReactNode, useMemo } from 'react';
 
+import { Heading } from '../../components/heading';
 import { MediaPlayer } from '@/components/media-player';
 import { Stack } from '@/components/stack';
 
@@ -9,8 +10,9 @@ type MediaProps = {
 };
 
 export const Media = ({ items }: MediaProps) => {
-  const media = useMemo(() => {
-    const files: ReactNode[] = [];
+  const { audio, video } = useMemo(() => {
+    const audio: ReactNode[] = [];
+    const video: ReactNode[] = [];
 
     for (const item of items) {
       if (!isFilled.linkToMedia(item.file)) {
@@ -19,7 +21,7 @@ export const Media = ({ items }: MediaProps) => {
 
       switch (item.media_type) {
         case 'Audio':
-          files.push(
+          audio.push(
             <MediaPlayer
               type="audio"
               src={item.file.url}
@@ -28,7 +30,7 @@ export const Media = ({ items }: MediaProps) => {
           );
           continue;
         case 'Video':
-          files.push(
+          video.push(
             <MediaPlayer
               type="video"
               poster={item.poster}
@@ -42,8 +44,19 @@ export const Media = ({ items }: MediaProps) => {
       }
     }
 
-    return files;
+    return { audio, video };
   }, [items]);
 
-  return <Stack>{media}</Stack>;
+  return (
+    <Stack space="2xl">
+      <Stack space="lg">
+        <Heading use="h3">Vidéo</Heading>
+        <Stack>{video}</Stack>
+      </Stack>
+      <Stack space="lg">
+        <Heading use="h3">Audio</Heading>
+        <Stack>{audio}</Stack>
+      </Stack>
+    </Stack>
+  );
 };
