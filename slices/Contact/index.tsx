@@ -42,14 +42,16 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
   const [isPending, startTransition] = useTransition();
 
   const onSubmit: SubmitHandler<MessageInputs> = useCallback(
-    (data) => {
+    (formData) => {
       startTransition(async () => {
-        const res = await sendForm(data);
+        const { data, error } = await sendForm(formData);
 
-        if (res && res.id) {
-          setSent(true);
-          reset();
+        if (error || !data) {
+          throw new Error(error?.message || 'An unexpected error occurred');
         }
+
+        setSent(true);
+        reset();
       });
     },
     [setSent, reset, startTransition],

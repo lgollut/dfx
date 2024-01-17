@@ -7,36 +7,59 @@ export const container = style({
 
   position: 'relative',
 
-  '::after': {
-    content: "''",
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      '::after': {
+        content: "''",
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
 
-    backgroundImage:
-      'linear-gradient(180deg, #000000 0%, #FFFFFF 52%, #000000 100%)',
-    mixBlendMode: 'multiply',
+        backgroundImage:
+          'linear-gradient(180deg, #000000 0%, #FFFFFF 52%, #000000 100%)',
+        mixBlendMode: 'multiply',
+      },
+    },
   },
 });
 
 export const content = style({
-  width: 'calc(100% / 3)',
   height: '100%',
   padding: `${vars.spacing['5xl']} ${vars.spacing.base}`,
 
-  position: 'absolute',
-  top: 0,
-  insetInlineStart: 0,
+  position: 'relative',
   zIndex: 1,
 
   backgroundColor: `hsl(${vars.hsl.surface} / 0.5)`,
   backdropFilter: 'blur(25px)',
+
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      position: 'absolute',
+      top: 0,
+      insetInlineStart: 0,
+    },
+  },
+});
+
+export const innerContent = style({
+  height: '100%',
+  overflow: 'hidden',
+});
+
+export const revealContainer = style({
+  height: 'min-content',
+  overflow: 'scroll',
 });
 
 export const image = style({
-  transform: 'translateX(140px)',
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      transform: 'translateX(140px)',
+    },
+  },
 });
 
 export const stack = style({

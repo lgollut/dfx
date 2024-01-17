@@ -3,8 +3,7 @@
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 import { SliceComponentProps } from '@prismicio/react';
-import PerfectScrollbar from 'perfect-scrollbar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Image } from '@/components/image';
 import { reelContainer, reelItem, reelWrapper } from '@/slices/Reel/reel.css';
@@ -21,18 +20,6 @@ export type ReelProps = SliceComponentProps<Content.ReelSlice>;
  */
 const Reel = ({ slice }: ReelProps): JSX.Element => {
   const [container, setContainer] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!container) {
-      return;
-    }
-
-    const ps = new PerfectScrollbar(container, { suppressScrollY: true });
-
-    return () => {
-      ps.destroy();
-    };
-  }, [container]);
 
   return (
     <section

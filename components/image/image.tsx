@@ -10,13 +10,8 @@ const Image = (
   ref: ForwardedRef<any>,
 ) => {
   return (
-    <div
-      ref={ref}
-      className={clsx(image({ cover, tint }), className)}
-      {...rest}
-    >
-      <PrismicNextImage field={field} />
-      {/* {field?.copyright && <Text variant="labelSmall">{field.copyright}</Text>} */}
+    <div ref={ref} className={clsx(image({ cover, tint }), className)}>
+      <PrismicNextImage field={field} {...rest} />
     </div>
   );
 };

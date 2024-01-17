@@ -3,6 +3,7 @@
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 import { isFilled } from '@prismicio/client';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -18,11 +19,14 @@ import {
   container,
   content,
   image,
+  innerContent,
+  revealContainer,
   stack,
 } from '@/slices/RevealedContent/revealed-content.css';
 
 export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
   const [revealed, setRevealed] = useState(false);
+  const isAnimated = useMediaQuery('screen and (min-width : 1024px)');
 
   const pastConcerts = useMemo(
     () =>
@@ -93,28 +97,22 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
         layout
         className={content}
         animate={revealed ? 'revealed' : 'hidden'}
+        transition={{
+          type: 'spring',
+          stiffness: 300,
+          velocity: 10,
+          damping: 25,
+        }}
         variants={{
           revealed: {
             width: '100%',
-            transition: {
-              type: 'spring',
-              stiffness: 300,
-              velocity: 10,
-              damping: 25,
-            },
           },
           hidden: {
-            width: '33%',
-            transition: {
-              type: 'spring',
-              stiffness: 300,
-              velocity: 10,
-              damping: 25,
-            },
+            width: isAnimated ? '33%' : '100%',
           },
         }}
       >
-        <Stack space="2xl" style={{ height: '100%', overflow: 'hidden' }}>
+        <Stack space="2xl" className={innerContent}>
           <Heading variant="headlineLarge">{slice.primary.title}</Heading>
           {futureConcerts.length > 0 && (
             <Stack space="lg">
@@ -126,7 +124,7 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
               </Stack>
             </Stack>
           )}
-          <Stack space="lg" style={{ flex: '1 1 100%' }}>
+          <Stack space="lg" style={{ flex: '1 1 100%', height: '1px' }}>
             <AnimatePresence mode="popLayout">
               {revealed ? (
                 <motion.div
@@ -152,7 +150,7 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
                 </motion.div>
               )}
             </AnimatePresence>
-            <div style={{ contain: 'size', height: '100%' }}>
+            <div className={revealContainer}>
               <AnimatePresence mode="wait">
                 {revealed ? (
                   <ConcertList key={'past'} concerts={pastConcerts} />
@@ -161,7 +159,11 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
                 )}
               </AnimatePresence>
             </div>
-            <Button onClick={handleReveal}>{'Tout voir'}</Button>
+            <div>
+              <Button onClick={handleReveal}>
+                {revealed ? 'Voir la sélection' : 'Tout voir'}
+              </Button>
+            </div>
           </Stack>
         </Stack>
       </motion.div>

@@ -16,7 +16,7 @@ const inputAppearanceBase = style([
 
     color: inputTextColor,
 
-    backgroundColor: vars.color.surface,
+    backgroundColor: vars.color.onSurface,
 
     transition: transition(['border-color', 'box-shadow'], {
       duration: 'shorter',

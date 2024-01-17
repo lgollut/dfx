@@ -4,7 +4,6 @@ import { vars } from '@/styles/contract.css';
 
 export const reelContainer = style({
   width: '100%',
-  overflow: 'hidden',
   paddingBlock: vars.spacing.base,
 
   position: 'relative',
@@ -13,6 +12,10 @@ export const reelContainer = style({
 export const reelWrapper = style({
   display: 'flex',
   gap: vars.spacing.base,
+  overflowX: 'scroll',
+  WebkitOverflowScrolling: 'touch',
+
+  scrollSnapType: 'x mandatory',
 });
 
 export const reelItem = style({
@@ -20,4 +23,7 @@ export const reelItem = style({
   flexGrow: 0,
 
   maxWidth: '70vw',
+
+  scrollSnapStop: 'normal',
+  scrollSnapAlign: 'center',
 });

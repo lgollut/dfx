@@ -3,6 +3,7 @@ import { SliceComponentProps } from '@prismicio/react';
 
 import { Frame } from '@/components/frame/frame';
 import { Heading } from '@/components/heading';
+import { Hidden } from '@/components/hidden';
 import { Image } from '@/components/image';
 import { Stack } from '@/components/stack';
 import { hero, rootTitle, title } from '@/slices/Hero/hero.css';
@@ -25,11 +26,22 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className={hero}
     >
-      <Frame
-        use={Image}
-        field={slice.primary.image['16/9']}
-        tint={slice.primary.tint}
-      />
+      <Hidden useCss at="xlUp">
+        <Frame
+          use={Image}
+          field={slice.primary.image['9/16']}
+          tint={slice.primary.tint}
+          priority
+        />
+      </Hidden>
+      <Hidden useCss at="lgDown">
+        <Frame
+          use={Image}
+          field={slice.primary.image['16/9']}
+          tint={slice.primary.tint}
+          priority
+        />
+      </Hidden>
       <Stack space="none" className={rootTitle}>
         <Heading variant="displayLarge" className={title}>
           {slice.primary.title}
