@@ -16,8 +16,6 @@ import {
   defaultLayoutIcons,
 } from '@vidstack/react/player/layouts/default';
 
-import { Image } from '@/components/image';
-
 import { posterStyle } from './media-player.css';
 
 type MediaPlayerProps = {
@@ -33,17 +31,14 @@ export const MediaPlayer = ({ poster, type, src, title }: MediaPlayerProps) => {
   }
 
   return (
-    <MediaPlayerPrimitive
-      // className={player}
-      title={title}
-      src={src}
-      crossorigin
-    >
+    <MediaPlayerPrimitive title={title} src={src} crossorigin>
       <MediaProvider>
         {poster && (
-          <Poster className={posterStyle} alt={''} asChild>
-            <Image field={poster} />
-          </Poster>
+          <Poster
+            className={posterStyle}
+            src={poster.url || ''}
+            alt={poster.alt || ''}
+          />
         )}
       </MediaProvider>
 
