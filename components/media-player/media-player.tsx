@@ -16,8 +16,6 @@ import {
   defaultLayoutIcons,
 } from '@vidstack/react/player/layouts/default';
 
-import { posterStyle } from './media-player.css';
-
 type MediaPlayerProps = {
   poster?: PrismicImageProps['field'];
   type: 'video' | 'audio';
@@ -31,15 +29,19 @@ export const MediaPlayer = ({ poster, type, src, title }: MediaPlayerProps) => {
   }
 
   return (
-    <MediaPlayerPrimitive title={title} src={src} crossorigin>
+    <MediaPlayerPrimitive
+      title={title}
+      src={src}
+      poster={poster?.url || ''}
+      playsinline
+      crossorigin
+    >
       <MediaProvider>
-        {poster && (
-          <Poster
-            className={posterStyle}
-            src={poster.url || ''}
-            alt={poster.alt || ''}
-          />
-        )}
+        <Poster
+          className="vds-poster"
+          src={poster?.url || ''}
+          alt={poster?.alt || ''}
+        />
       </MediaProvider>
 
       {/* <VideoLayout /> */}
