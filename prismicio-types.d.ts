@@ -212,8 +212,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -483,6 +482,17 @@ export interface OverlaySectionSliceDefaultPrimary {
   image: prismic.ImageField<'24/9' | '3/2'>;
 
   /**
+   * Image Ratio field in *OverlaySection → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 24:9
+   * - **API ID Path**: overlay_section.primary.image_ratio
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  image_ratio: prismic.SelectField<'24:9' | '3:2', 'filled'>;
+
+  /**
    * Tint field in *OverlaySection → Primary*
    *
    * - **Field Type**: Select
@@ -702,7 +712,7 @@ declare module '@prismicio/client' {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 

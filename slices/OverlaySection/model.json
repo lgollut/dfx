@@ -41,10 +41,22 @@
               },
               {
                 "name": "3/2",
-                "width": 390,
-                "height": 260
+                "width": 1728,
+                "height": 1152
               }
             ]
+          }
+        },
+        "image_ratio": {
+          "type": "Select",
+          "config": {
+            "label": "Image Ratio",
+            "placeholder": "",
+            "options": [
+              "24:9",
+              "3:2"
+            ],
+            "default_value": "24:9"
           }
         },
         "tint": {

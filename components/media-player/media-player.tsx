@@ -34,7 +34,7 @@ export const MediaPlayer = ({ poster, type, src, title }: MediaPlayerProps) => {
       src={src}
       poster={poster?.url || ''}
       playsinline
-      crossorigin
+      crossorigin="true"
     >
       <MediaProvider>
         <Poster

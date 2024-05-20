@@ -12,7 +12,7 @@ export const Concert = ({ concert }: ConcertProps) => {
 
   useEffect(() => {
     const date = new Intl.DateTimeFormat(navigator.language, {
-      dateStyle: 'short',
+      dateStyle: 'medium',
     }).format(Date.parse(concert.data.date!));
 
     setDate(date);
@@ -21,6 +21,6 @@ export const Concert = ({ concert }: ConcertProps) => {
   return (
     <Text
       key={concert.uid}
-    >{`${formattedDate}, ${concert.data.venue} - ${concert.data.location}`}</Text>
+    >{`${formattedDate} | ${concert.data.venue} - ${concert.data.location}`}</Text>
   );
 };

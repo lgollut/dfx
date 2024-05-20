@@ -45,10 +45,8 @@ export const overlay = style({
       height: 'auto',
 
       position: 'absolute',
-      top: '60%',
+      bottom: '10%',
       insetInlineStart: 0,
-
-      transform: 'translateY(-50%)',
     },
   },
 });

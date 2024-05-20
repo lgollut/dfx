@@ -24,6 +24,10 @@ export type OverlaySectionProps =
  * Component for "OverlaySection" Slices.
  */
 const OverlaySection = ({ slice }: OverlaySectionProps): JSX.Element => {
+  const ratio = (slice.primary.image_ratio?.replace(':', '/') ?? '24/9') as
+    | '24/9'
+    | '3/2';
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -32,7 +36,7 @@ const OverlaySection = ({ slice }: OverlaySectionProps): JSX.Element => {
     >
       <Frame
         use={Image}
-        field={slice.primary.image['24/9']}
+        field={slice.primary.image[ratio]}
         tint={slice.primary.tint}
       />
       <div className={overlayWrapper}>
