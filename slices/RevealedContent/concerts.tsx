@@ -66,7 +66,7 @@ export const ConcertsSlice = ({ slice, context }: RevealedContentProps) => {
           const concertDate = new Date(concert.data.date);
           const currentDate = new Date();
 
-          return concertDate >= currentDate;
+          return concertDate > currentDate;
         })
         .sort((a, b) => {
           const aDate = new Date(a.data.date!);
