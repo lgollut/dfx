@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import '@/styles/layers.css';
 
 import { PrismicPreview } from '@prismicio/next';
+import { Analytics } from '@vercel/analytics/react';
 import { clsx } from 'clsx';
 import { Metadata } from 'next';
 
@@ -25,6 +26,8 @@ export default function RootLayout({
     <html lang="en" className={clsx(fontClass, html)}>
       <body className={body}>
         {children}
+
+        <Analytics />
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
